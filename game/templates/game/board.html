@@ -436,7 +436,23 @@
             height: 100%;
             pointer-events: none;
         }
+    /* ============================================================
+   Board Themes
+   ============================================================ */
+    body[data-theme="classic"] .square.light { background-color: #eeeed2; }
+    body[data-theme="classic"] .square.dark  { background-color: #769656; }
 
+    body[data-theme="wooden"] .square.light { background-color: #f0d9b5; }
+    body[data-theme="wooden"] .square.dark  { background-color: #b58863; }
+
+    body[data-theme="futuristic"] .square.light { background-color: #a0c4ff; }
+    body[data-theme="futuristic"] .square.dark  { background-color: #1a1a6e; }
+
+    body[data-theme="marble"] .square.light { background-color: #e8e8e8; }
+    body[data-theme="marble"] .square.dark  { background-color: #888888; }
+
+    body[data-theme="ocean"] .square.light { background-color: #b8e0f7; }
+    body[data-theme="ocean"] .square.dark  { background-color: #1a6b8a; }
     </style>
     
     <!-- Vercel Web Analytics -->
@@ -487,6 +503,16 @@
             <div class="card">
                 <div class="card-title">Captured by <span id="blackCapturedName">Black</span></div>
                 <div class="captured-list" id="blackCaptured"></div>
+                </div>
+            <div class="card">
+                <div class="card-title">Board Theme</div>
+                <select id="themeSelector" class="btn" style="background:#1a1a2e; color:#fff; border:1px solid #252545; cursor:pointer;">
+                <option value="classic">Classic</option>
+                <option value="wooden">Wooden</option>
+                <option value="futuristic">Futuristic</option>
+                <option value="marble">Marble</option>
+                <option value="ocean">Ocean</option>
+                </select>
             </div>
         </div>
 
@@ -1390,6 +1416,18 @@
         /* ==========================================================
         INIT (Game yahan se shuru hota hai)
         ========================================================== */
+        // Theme switcher
+        const themeSelector = document.getElementById('themeSelector');
+        const savedTheme = localStorage.getItem('boardTheme') || 'classic';
+        document.body.setAttribute('data-theme', savedTheme);
+        themeSelector.value = savedTheme;
+
+        themeSelector.addEventListener('change', () => {
+        const theme = themeSelector.value;
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('boardTheme', theme);
+        });
+        
         loadGame();
     })();
     </script>
